@@ -15,3 +15,5 @@
 *.pch
 *.oca
 *.tmp
+*.zip
+*.exe

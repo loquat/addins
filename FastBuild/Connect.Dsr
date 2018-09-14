@@ -1,11 +1,11 @@
 VERSION 5.00
 Begin {AC0714F6-3D04-11D1-AE7D-00A0C90F26F4} Connect 
-   ClientHeight    =   10590
+   ClientHeight    =   14700
    ClientLeft      =   1740
    ClientTop       =   1545
-   ClientWidth     =   15810
-   _ExtentX        =   27887
-   _ExtentY        =   18680
+   ClientWidth     =   18000
+   _ExtentX        =   31750
+   _ExtentY        =   25929
    _Version        =   393216
    Description     =   "Streamline Build Process"
    DisplayName     =   "Fast Build"
@@ -33,48 +33,51 @@ Option Explicit
 '
 'also would be nice to be able to write postbuild command output to debug window..but havent found way yet..
 
-Private FormDisplayed           As Boolean
-Dim mfrmAddIn                   As frmAddIn
+Private FormDisplayed As Boolean
+Dim mfrmAddIn As frmAddIn
 
-Dim mcbFastBuildUI                As Office.CommandBarControl
+Dim mcbFastBuildUI As Office.CommandBarControl
 Private WithEvents mnuFastBuildUI As CommandBarEvents
 Attribute mnuFastBuildUI.VB_VarHelpID = -1
 
-Dim mcbFastBuild                As Office.CommandBarControl
+Dim mcbFastBuild As Office.CommandBarControl
 Private WithEvents mnuFastBuild As CommandBarEvents
 Attribute mnuFastBuild.VB_VarHelpID = -1
 
 Private WithEvents FileEvents As VBIDE.FileControlEvents
 Attribute FileEvents.VB_VarHelpID = -1
 
-Dim mcbExecute                As Office.CommandBarControl
+Dim mcbExecute As Office.CommandBarControl
 Private WithEvents mnuExecute As CommandBarEvents
 Attribute mnuExecute.VB_VarHelpID = -1
 
-Dim mcbAddref                As Office.CommandBarControl
+Dim mcbAddref As Office.CommandBarControl
 Private WithEvents mnuAddref As CommandBarEvents
 Attribute mnuAddref.VB_VarHelpID = -1
 
-Dim mcbImmediate                As Office.CommandBarControl
+Dim mcbImmediate As Office.CommandBarControl
 Private WithEvents mnuImmediate As CommandBarEvents
 Attribute mnuImmediate.VB_VarHelpID = -1
 
-Dim mcbAddFiles                As Office.CommandBarControl
+Dim mcbAddFiles As Office.CommandBarControl
 Private WithEvents mnuAddFiles As CommandBarEvents
 Attribute mnuAddFiles.VB_VarHelpID = -1
 
-Dim mcbMemWindow                As Office.CommandBarControl
+Dim mcbMemWindow As Office.CommandBarControl
 Private WithEvents mnuMemWindow As CommandBarEvents
 Attribute mnuMemWindow.VB_VarHelpID = -1
 
-Dim mcbCodeDB                As Office.CommandBarControl
+Dim mcbCodeDB As Office.CommandBarControl
 Private WithEvents mnuCodeDB As CommandBarEvents
 Attribute mnuCodeDB.VB_VarHelpID = -1
 
-Dim mcbApiAddin                   As Office.CommandBarControl
+Dim mcbApiAddin As Office.CommandBarControl
 Private WithEvents mnuApiAddin As CommandBarEvents
 Attribute mnuApiAddin.VB_VarHelpID = -1
 
+Dim mcbOpenHomeDir As Office.CommandBarControl
+Private WithEvents mnuOpenHomeDir As CommandBarEvents
+Attribute mnuOpenHomeDir.VB_VarHelpID = -1
 
 Dim mcbRealMakeMenu As Office.CommandBarControl
 
@@ -139,6 +142,10 @@ Private Sub AddinInstance_OnConnection(ByVal Application As Object, ByVal Connec
         Me.Show
     Else
     
+        If GetSetting("FastBuild", "Settings", "DisplayAsHex", 0) = "1" Then
+            LoadHexToolTipsDll
+        End If
+        
         MemWindowExe = App.path & "\MemoryWindow\standalone.exe"
         CodeDBExe = App.path & "\CodeDB\CodeDB.exe"
         APIAddInExe = App.path & "\API_AddIn\API_AddIn.exe"
@@ -165,6 +172,12 @@ Private Sub AddinInstance_OnConnection(ByVal Application As Object, ByVal Connec
         If Not mcbAddFiles Is Nothing Then
             Set mnuAddFiles = VBInstance.Events.CommandBarEvents(mcbAddFiles)
         End If
+        
+        Set mcbOpenHomeDir = AddrefMenu("Open Project Directory", , "")
+        If Not mcbOpenHomeDir Is Nothing Then
+            Set mnuOpenHomeDir = VBInstance.Events.CommandBarEvents(mcbOpenHomeDir)
+        End If
+        
         
         'external utilities
         '-----------------------------------------------------------------------------
@@ -298,6 +311,12 @@ Private Sub AddinInstance_OnDisconnection(ByVal RemoveMode As AddInDesignerObjec
          mcbAddFiles.Delete
          Set mcbAddFiles = Nothing
          Set mnuAddFiles = Nothing
+    End If
+    
+    If Not mcbOpenHomeDir Is Nothing Then
+         mcbOpenHomeDir.Delete
+         Set mcbOpenHomeDir = Nothing
+         Set mnuOpenHomeDir = Nothing
     End If
     
     If Not mfrmAddIn Is Nothing Then Set mfrmAddIn = Nothing
@@ -498,7 +517,7 @@ Private Sub mnuExecute_Click(ByVal CommandBarControl As Object, handled As Boole
     Shell fastBuildPath & cmdLine, vbNormalFocus
     
     If Err.Number <> 0 Then
-        MsgBox Err.Description, vbExclamation
+        MsgBox "Menu Execute Error: " & Err.Description, vbExclamation
     End If
     
 End Sub
@@ -526,11 +545,11 @@ Private Function AddButton(caption As String, resImg As Long) As Office.CommandB
     Dim orgData As String
     Dim ipict As IPictureDisp
     
-    On Error GoTo hell
+    On Error Resume Next
     
 1    If VBInstance.CommandBars.Count = 0 Then VBInstance.CommandBars.Add
 
-    'orgData = Clipboard.GetText
+    orgData = Clipboard.GetText
     Clipboard.Clear
     
 2    VBInstance.CommandBars(1).Visible = True
@@ -545,11 +564,11 @@ Private Function AddButton(caption As String, resImg As Long) As Office.CommandB
      End If
 9    Set AddButton = cbMenu
     
-    'Clipboard.Clear
-    'If Len(orgData) > 0 Then Clipboard.SetText orgData
+    Clipboard.Clear
+    If Len(orgData) > 0 Then Clipboard.SetText orgData
     
     Exit Function
-hell:
+hell: 'this can barf with typename(cbmenu) = nothing
     MsgBox "FastBuild.AddButton: " & caption & " Err: " & Err.Description & " line: " & Erl & " " & TypeName(cbMenu)
     
 End Function
@@ -694,3 +713,11 @@ End Sub
 '        mnuImmediate_Click CommandBarControl, handled, CancelDefault
 '    End If
 'End Sub
+
+Private Sub mnuOpenHomeDir_Click(ByVal CommandBarControl As Object, handled As Boolean, CancelDefault As Boolean)
+    On Error Resume Next
+    Dim path As String
+    path = VBInstance.ActiveVBProject.FileName
+    path = GetParentFolder(path)
+    Shell "explorer " & path, vbNormalFocus
+End Sub

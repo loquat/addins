@@ -13,6 +13,14 @@ Begin VB.Form frmAddIn
    ScaleHeight     =   4950
    ScaleWidth      =   10050
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox chkDisplayAsHex 
+      Caption         =   "ints as hex in dbg tooltips"
+      Height          =   315
+      Left            =   150
+      TabIndex        =   19
+      Top             =   1350
+      Width           =   2190
+   End
    Begin VB.CheckBox chkShowPostBuildOutput 
       Caption         =   "Show Build Output"
       Height          =   195
@@ -280,6 +288,24 @@ Attribute VB_Exposed = False
 '
 Dim loaded As Boolean
 
+
+Private Sub chkDisplayAsHex_Click()
+        
+    If Not loaded Then Exit Sub
+    
+    If chkDisplayAsHex.value = 0 Then
+        SaveSetting "FastBuild", "Settings", "DisplayAsHex", 0
+    Else
+        SaveSetting "FastBuild", "Settings", "DisplayAsHex", 1
+        If Not LoadHexToolTipsDll() Then
+            MsgBox "Could not find hextooTip.dll?"
+            chkDisplayAsHex.value = 0
+        End If
+    End If
+    
+End Sub
+
+
 'Private Sub chkClearImmediate_Click()
 '
 '    ClearImmediateOnStart = chkClearImmediate.value
@@ -364,6 +390,9 @@ Private Sub Form_Load()
     chkShowPostBuildOutput.value = ShowPostBuildOutput
     
     txtPostBuild = GetPostBuildCommand
+    
+    chkDisplayAsHex.value = IIf(GetSetting("FastBuild", "Settings", "DisplayAsHex", 0) = "1", 1, 0)
+    
     loaded = True
     
      txtAbout = "Build Path once set will be used from then on out automatically as default" & vbCrLf & _

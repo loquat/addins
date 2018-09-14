@@ -1,32 +1,23 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmAddRefs 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Fast Build - Add References"
-   ClientHeight    =   5880
+   ClientHeight    =   4890
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   5475
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5880
+   ScaleHeight     =   4890
    ScaleWidth      =   5475
    StartUpPosition =   2  'CenterScreen
-   Begin VB.TextBox txtDetails 
-      Height          =   1050
-      Left            =   135
-      MultiLine       =   -1  'True
-      TabIndex        =   7
-      Top             =   4320
-      Width           =   5145
-   End
    Begin MSComctlLib.ListView lvFiltered 
       Height          =   1950
-      Left            =   1395
-      TabIndex        =   6
-      Top             =   990
+      Left            =   0
+      TabIndex        =   5
+      Top             =   600
       Visible         =   0   'False
       Width           =   2400
       _ExtentX        =   4233
@@ -49,17 +40,25 @@ Begin VB.Form frmAddRefs
          Object.Width           =   2540
       EndProperty
    End
+   Begin VB.TextBox txtDetails 
+      Height          =   1050
+      Left            =   75
+      MultiLine       =   -1  'True
+      TabIndex        =   3
+      Top             =   3675
+      Width           =   5145
+   End
    Begin VB.Frame Frame1 
       BorderStyle     =   0  'None
       Height          =   465
-      Left            =   765
-      TabIndex        =   3
-      Top             =   3195
+      Left            =   75
+      TabIndex        =   0
+      Top             =   3000
       Width           =   3795
       Begin VB.TextBox txtSearch 
          Height          =   285
-         Left            =   855
-         TabIndex        =   4
+         Left            =   825
+         TabIndex        =   1
          Top             =   90
          Width           =   2625
       End
@@ -77,7 +76,7 @@ Begin VB.Form frmAddRefs
          ForeColor       =   &H00FF0000&
          Height          =   240
          Left            =   3600
-         TabIndex        =   8
+         TabIndex        =   4
          Top             =   135
          Width           =   195
       End
@@ -85,88 +84,36 @@ Begin VB.Form frmAddRefs
          Caption         =   "Search"
          Height          =   285
          Left            =   135
-         TabIndex        =   5
+         TabIndex        =   2
          Top             =   135
          Width           =   645
       End
    End
-   Begin TabDlg.SSTab SSTab1 
-      Height          =   4155
-      Left            =   90
-      TabIndex        =   0
-      Top             =   45
-      Width           =   5235
-      _ExtentX        =   9234
-      _ExtentY        =   7329
-      _Version        =   393216
-      TabOrientation  =   1
-      Style           =   1
-      Tabs            =   2
-      TabHeight       =   520
-      TabCaption(0)   =   "Components"
-      TabPicture(0)   =   "frmAddRefs.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "lv"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).ControlCount=   1
-      TabCaption(1)   =   "References"
-      TabPicture(1)   =   "frmAddRefs.frx":001C
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "lv2"
-      Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).ControlCount=   1
-      Begin MSComctlLib.ListView lv 
-         Height          =   3030
-         Left            =   180
-         TabIndex        =   1
-         Top             =   135
-         Width           =   4875
-         _ExtentX        =   8599
-         _ExtentY        =   5345
-         View            =   3
-         LabelEdit       =   1
-         Sorted          =   -1  'True
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         HideColumnHeaders=   -1  'True
-         Checkboxes      =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         NumItems        =   1
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Object.Width           =   2540
-         EndProperty
-      End
-      Begin MSComctlLib.ListView lv2 
-         Height          =   2850
-         Left            =   -74865
-         TabIndex        =   2
-         Top             =   135
-         Width           =   4965
-         _ExtentX        =   8758
-         _ExtentY        =   5027
-         View            =   3
-         LabelEdit       =   1
-         Sorted          =   -1  'True
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         HideColumnHeaders=   -1  'True
-         Checkboxes      =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         NumItems        =   1
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Object.Width           =   2540
-         EndProperty
-      End
+   Begin MSComctlLib.ListView lv2 
+      Height          =   2850
+      Left            =   75
+      TabIndex        =   6
+      Top             =   75
+      Width           =   4965
+      _ExtentX        =   8758
+      _ExtentY        =   5027
+      View            =   3
+      LabelEdit       =   1
+      Sorted          =   -1  'True
+      LabelWrap       =   -1  'True
+      HideSelection   =   -1  'True
+      HideColumnHeaders=   -1  'True
+      Checkboxes      =   -1  'True
+      FullRowSelect   =   -1  'True
+      _Version        =   393217
+      ForeColor       =   -2147483640
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Appearance      =   1
+      NumItems        =   1
+      BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         Object.Width           =   2540
+      EndProperty
    End
 End
 Attribute VB_Name = "frmAddRefs"
@@ -177,20 +124,27 @@ Attribute VB_Exposed = False
 ' Author: David Zimmer
 ' Site:   http://sandsprite.com
 '
+Option Explicit
+
 Dim reg As New CReg
 Dim tlbs As Collection
 Dim selEntry As CEntry
 
 Private Sub Form_Load()
    
-    With lv
-        lv2.Move .Left, .Top, .Width, .Height
-        lvFiltered.Move .Left + SSTab1.Left, .Top + SSTab1.Top, .Width, .Height
+    'With lv
+    '    lv2.Move .Left, .Top, .Width, .Height
+    '    lvFiltered.Move .Left + SSTab1.Left, .Top + SSTab1.Top, .Width, .Height
+    'End With
+    
+    With lv2
+        lvFiltered.Move .Left, .Top, .Width, .Height
     End With
     
-    lv.ColumnHeaders(1).Width = lv.Width
+    'lv.ColumnHeaders(1).Width = lv.Width
     lv2.ColumnHeaders(1).Width = lv2.Width
-    lvFiltered.ColumnHeaders(1).Width = lv.Width
+    lvFiltered.ColumnHeaders(1).Width = lv2.Width
+    
     
     Set tlbs = New Collection
     
@@ -202,9 +156,10 @@ Private Sub Form_Load()
     'BuildComponentList 'you can not add component refs with the addin api apparently...
                         '(this was originally developed for the logic and LazActiveX UI)
     
-    SSTab1.Tab = 1
-    SSTab1.Enabled = False
+    'SSTab1.Tab = 1
+    'SSTab1.Enabled = False
     
+    BuildReferenceList
 End Sub
 
 
@@ -285,6 +240,7 @@ End Function
 
 
 Function GetExtension(path) As String
+    Dim tmp, ub
     If Len(path) = 0 Then Exit Function
     tmp = Split(path, "\")
     ub = tmp(UBound(tmp))
@@ -295,87 +251,87 @@ Function GetExtension(path) As String
     End If
 End Function
 
-
-Function BuildComponentList()
-    
-    Dim clsids() As String
-    Dim clsid
-    Dim li As ListItem
-    Dim e As CEntry
-    Dim tmp As CEntry
-    
-    'Const full = "\SOFTWARE\Classes\CLSID\{0DE63042-EB7E-4449-BF13-7FF73866F20E}\Implemented Categories\{40FC6ED5-2438-11CF-A3DB-080036F12502}"
-    Const catid_control = "\Implemented Categories\{40FC6ED4-2438-11cf-A3DB-080036F12502}"
-    Const catid_programmable = "\Implemented Categories\{40FC6ED5-2438-11CF-A3DB-080036F12502}"
-    Const server = "\InprocServer32"
-    
-    If reg.hive = HKEY_CLASSES_ROOT Then
-        clsids = reg.EnumKeys("\CLSID")
-    Else
-        clsids = reg.EnumKeys("\SOFTWARE\Classes\CLSID")
-    End If
-    
-    For Each clsid In clsids
-
-        Set e = New CEntry
-        e.clsid = clsid
-        
-        'If clsID = "{66CBC149-A49F-48F9-B17A-6A3EA9B42A87}" Then Stop
-        
-        If reg.hive = HKEY_CLASSES_ROOT Then
-            clsid = "\CLSID\" & clsid
-        Else
-            clsid = "\SOFTWARE\Classes\CLSID\" & clsid
-        End If
-        
-        With e
-        
-            .isControl = reg.keyExists(clsid & "\Control")
-            If .isControl = False Then
-                If reg.keyExists(clsid & catid_control) Then .isControl = True
-            End If
-            
-            '.isProgrammable = reg.keyExists(clsID & "\Programmable")
-            'If .isProgrammable = False Then
-            '    If reg.keyExists(clsID & catid_programmable) Then .isProgrammable = True
-            'End If
-            
-            .typeLib = reg.ReadValue(clsid & "\typeLib", "")
-            
-            If Len(.typeLib) > 0 Then
-            
-                'If e.isControl And KeyExistsInCollection(.typeLib, tlbs) Then
-                '    Set tmp = tlbs(.typeLib)
-                '    If Not tmp.isControl Then tlbs.Remove tmp.typeLib   'we will update it below..
-                'End If
-                        
-                'If (.isControl Or .isProgrammable) And Not KeyExistsInCollection(.typeLib, tlbs) Then
-                If .isControl And Not KeyExistsInCollection(.typeLib, tlbs) Then
-                    .name = GetName(.typeLib)
-                    If Len(.name) > 0 Then
-                        .path = reg.ReadValue(clsid & "\InprocServer32", "")
-                        .progID = reg.ReadValue(clsid & "\ProgID", "")
-                        .version = reg.ReadValue(clsid & "\version", "")
-                        tlbs.Add e, .typeLib
-                        
-                        If e.isControl Then
-                            Set li = lv.ListItems.Add(, , .name)
-                            Set li.Tag = e
-                            .AlreadyReferenced = RefAlreadyExists(.clsid)
-                            li.Checked = .AlreadyReferenced
-                        'ElseIf e.isProgrammable Then
-                        '    Set li = lv2.ListItems.Add(, , .name)
-                        '    Set li.Tag = e
-                        End If
-                    End If
-                    
-                End If
-            End If
-            
-        End With
-
-   Next
-End Function
+'no addin api to add ocx controls :-\
+'Function BuildComponentList()
+'
+'    Dim clsids() As String
+'    Dim clsid
+'    Dim li As ListItem
+'    Dim e As CEntry
+'    Dim tmp As CEntry
+'
+'    'Const full = "\SOFTWARE\Classes\CLSID\{0DE63042-EB7E-4449-BF13-7FF73866F20E}\Implemented Categories\{40FC6ED5-2438-11CF-A3DB-080036F12502}"
+'    Const catid_control = "\Implemented Categories\{40FC6ED4-2438-11cf-A3DB-080036F12502}"
+'    Const catid_programmable = "\Implemented Categories\{40FC6ED5-2438-11CF-A3DB-080036F12502}"
+'    Const server = "\InprocServer32"
+'
+'    If reg.hive = HKEY_CLASSES_ROOT Then
+'        clsids = reg.EnumKeys("\CLSID")
+'    Else
+'        clsids = reg.EnumKeys("\SOFTWARE\Classes\CLSID")
+'    End If
+'
+'    For Each clsid In clsids
+'
+'        Set e = New CEntry
+'        e.clsid = clsid
+'
+'        'If clsID = "{66CBC149-A49F-48F9-B17A-6A3EA9B42A87}" Then Stop
+'
+'        If reg.hive = HKEY_CLASSES_ROOT Then
+'            clsid = "\CLSID\" & clsid
+'        Else
+'            clsid = "\SOFTWARE\Classes\CLSID\" & clsid
+'        End If
+'
+'        With e
+'
+'            .isControl = reg.keyExists(clsid & "\Control")
+'            If .isControl = False Then
+'                If reg.keyExists(clsid & catid_control) Then .isControl = True
+'            End If
+'
+'            '.isProgrammable = reg.keyExists(clsID & "\Programmable")
+'            'If .isProgrammable = False Then
+'            '    If reg.keyExists(clsID & catid_programmable) Then .isProgrammable = True
+'            'End If
+'
+'            .typeLib = reg.ReadValue(clsid & "\typeLib", "")
+'
+'            If Len(.typeLib) > 0 Then
+'
+'                'If e.isControl And KeyExistsInCollection(.typeLib, tlbs) Then
+'                '    Set tmp = tlbs(.typeLib)
+'                '    If Not tmp.isControl Then tlbs.Remove tmp.typeLib   'we will update it below..
+'                'End If
+'
+'                'If (.isControl Or .isProgrammable) And Not KeyExistsInCollection(.typeLib, tlbs) Then
+'                If .isControl And Not KeyExistsInCollection(.typeLib, tlbs) Then
+'                    .name = GetName(.typeLib)
+'                    If Len(.name) > 0 Then
+'                        .path = reg.ReadValue(clsid & "\InprocServer32", "")
+'                        .progID = reg.ReadValue(clsid & "\ProgID", "")
+'                        .version = reg.ReadValue(clsid & "\version", "")
+'                        tlbs.Add e, .typeLib
+'
+'                        If e.isControl Then
+'                            Set li = lv.ListItems.Add(, , .name)
+'                            Set li.Tag = e
+'                            .AlreadyReferenced = RefAlreadyExists(.clsid)
+'                            li.Checked = .AlreadyReferenced
+'                        'ElseIf e.isProgrammable Then
+'                        '    Set li = lv2.ListItems.Add(, , .name)
+'                        '    Set li.Tag = e
+'                        End If
+'                    End If
+'
+'                End If
+'            End If
+'
+'        End With
+'
+'   Next
+'End Function
 
 Function ExistsInLV(s, lv As ListView) As Boolean
     Dim li As ListItem
@@ -386,6 +342,7 @@ End Function
 
 Private Sub push(ary, value) 'this modifies parent ary object
     On Error GoTo init
+    Dim x
     x = UBound(ary) '<-throws Error If Not initalized
     ReDim Preserve ary(UBound(ary) + 1)
     ary(UBound(ary)) = value
@@ -433,6 +390,7 @@ End Function
 
 Function AryIsEmpty(ary) As Boolean
   On Error GoTo oops
+    Dim i
     i = UBound(ary)  '<- throws error if not initalized
     AryIsEmpty = False
   Exit Function
@@ -450,7 +408,8 @@ Private Sub lvFiltered_ItemCheck(ByVal item As MSComctlLib.ListItem)
     Dim llv As ListView
     
     'we need to sync parent list..
-    If SSTab1.Tab = 0 Then Set llv = lv Else Set llv = lv2
+    'If SSTab1.Tab = 0 Then Set llv = lv Else Set llv = lv2
+    Set llv = lv2
     
     For Each li In llv.ListItems
         If li.text = item.text Then
@@ -467,9 +426,9 @@ Private Sub lv2_ItemCheck(ByVal item As MSComctlLib.ListItem)
     HandleItemCheck item
 End Sub
 
-Private Sub lv_ItemCheck(ByVal item As MSComctlLib.ListItem)
-    HandleItemCheck item
-End Sub
+'Private Sub lv_ItemCheck(ByVal item As MSComctlLib.ListItem)
+'    HandleItemCheck item
+'End Sub
 
 Sub HandleItemCheck(ByVal item As MSComctlLib.ListItem)
 
@@ -486,31 +445,31 @@ Sub HandleItemCheck(ByVal item As MSComctlLib.ListItem)
     guid = selEntry.clsid
     
     If item.Checked Then
-        If SSTab1.Tab = 0 Then 'components
-            VBInstance.ActiveVBProject.AddToolboxProgID selEntry.progID
-            selEntry.AlreadyReferenced = True
-        Else
+        'If SSTab1.Tab = 0 Then 'components
+        '    VBInstance.ActiveVBProject.AddToolboxProgID selEntry.progID
+        '    selEntry.AlreadyReferenced = True
+        'Else
             Set r = VBInstance.ActiveVBProject.References.AddFromFile(selEntry.path)
             selEntry.AlreadyReferenced = True
             If r Is Nothing Then
                 MsgBox "Could not add reference to " & guid
                 Exit Sub
             End If
-        End If
+        'End If
     Else
         
-        If SSTab1.Tab = 0 Then
-            MsgBox "Sorry i cant remove components from the toolbox?", vbInformation
-            item.Checked = True
-            Exit Sub
-        End If
+        'If SSTab1.Tab = 0 Then
+        '    MsgBox "Sorry i cant remove components from the toolbox?", vbInformation
+        '    item.Checked = True
+        '    Exit Sub
+        'End If
         
         'if you remove ref for an ocx
         'it wont remove from toolbox..if then use ide to remove compoenent crash here:
         '004A21CB  cmp         word ptr [ecx+32h],0
         
         'If SSTab1.Tab = 0 Then guid = selEntry.progID
-        Set r = GetReference(guid, (SSTab1.Tab = 0))
+        Set r = GetReference(guid) ',  (SSTab1.Tab = 0))
         If r Is Nothing Then
             MsgBox "Could not find reference to " & guid
             Exit Sub
@@ -531,10 +490,10 @@ hell:
     
 End Sub
 
-Private Sub lv_ItemClick(ByVal item As MSComctlLib.ListItem)
-    Set selEntry = item.Tag
-    txtDetails = selEntry.ToString()
-End Sub
+'Private Sub lv_ItemClick(ByVal item As MSComctlLib.ListItem)
+'    Set selEntry = item.Tag
+'    txtDetails = selEntry.ToString()
+'End Sub
 
 Private Sub lv2_ItemClick(ByVal item As MSComctlLib.ListItem)
     Set selEntry = item.Tag
@@ -547,14 +506,14 @@ Private Sub lvFiltered_ItemClick(ByVal item As MSComctlLib.ListItem)
 End Sub
 
 
-Private Sub SSTab1_Click(PreviousTab As Integer)
-
-    'load on demand to reduce startup time
-    If SSTab1.Tab = 1 And lv2.ListItems.Count = 0 Then BuildReferenceList
-    
-    If Len(txtSearch) > 0 Then txtSearch_Change
-
-End Sub
+'Private Sub SSTab1_Click(PreviousTab As Integer)
+'
+'    'load on demand to reduce startup time
+'    If SSTab1.Tab = 1 And lv2.ListItems.Count = 0 Then BuildReferenceList
+'
+'    If Len(txtSearch) > 0 Then txtSearch_Change
+'
+'End Sub
 
 Private Sub txtSearch_Change()
 
@@ -567,7 +526,8 @@ Private Sub txtSearch_Change()
     Dim li2 As ListItem
     Dim llv As ListView
     
-    If SSTab1.Tab = 0 Then Set llv = lv Else Set llv = lv2
+    'If SSTab1.Tab = 0 Then Set llv = lv Else Set llv = lv2
+    Set llv = lv2
     
     lvFiltered.Visible = True
     lvFiltered.ListItems.Clear

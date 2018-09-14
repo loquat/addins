@@ -18,6 +18,16 @@ Dim Special() As String
 
 
 
+Sub push(ary, value) 'this modifies parent ary object
+    On Error GoTo init
+    Dim x
+    x = UBound(ary) '<-throws Error If Not initalized
+    ReDim Preserve ary(UBound(ary) + 1)
+    ary(UBound(ary)) = value
+    Exit Sub
+init:     ReDim ary(0): ary(0) = value
+End Sub
+
 Sub Freeze(hwnd As Long)
     SendMessageLong hwnd, WM_SETREDRAW, False, &O0
 End Sub

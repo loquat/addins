@@ -60,7 +60,24 @@ Public Declare Function GetCurrentProcessId Lib "kernel32" () As Long
             lpTemplateName As String
     End Type
      
-    Private Declare Function GetOpenFileName Lib "comdlg32.dll" Alias "GetOpenFileNameA" (pOpenfilename As OPENFILENAME) As Long
+Private Declare Function GetOpenFileName Lib "comdlg32.dll" Alias "GetOpenFileNameA" (pOpenfilename As OPENFILENAME) As Long
+Private Declare Function GetModuleHandle Lib "kernel32" Alias "GetModuleHandleA" (ByVal lpModuleName As String) As Long
+Private Declare Function LoadLibrary Lib "kernel32" Alias "LoadLibraryA" (ByVal lpLibFileName As String) As Long
+
+Function LoadHexToolTipsDll() As Boolean
+
+    Dim h As Long
+    Const dll = "hexTooltip.dll"
+    
+    If GetModuleHandle(dll) = 0 Then
+        h = LoadLibrary(dll)
+        If h = 0 Then h = LoadLibrary(App.path & "\" & dll)
+        If h = 0 Then Exit Function
+    End If
+
+    LoadHexToolTipsDll = True
+    
+End Function
 
 Function IPCCommand(msg As String)
     On Error GoTo hell

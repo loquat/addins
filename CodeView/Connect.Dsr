@@ -1,11 +1,11 @@
 VERSION 5.00
 Begin {AC0714F6-3D04-11D1-AE7D-00A0C90F26F4} Connect 
-   ClientHeight    =   10605
+   ClientHeight    =   10950
    ClientLeft      =   1740
    ClientTop       =   1545
-   ClientWidth     =   23370
-   _ExtentX        =   41222
-   _ExtentY        =   18706
+   ClientWidth     =   21645
+   _ExtentX        =   38179
+   _ExtentY        =   19315
    _Version        =   393216
    Description     =   $"Connect.dsx":0000
    DisplayName     =   "CodeView"

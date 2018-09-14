@@ -42,3 +42,6 @@ SideBySideActX - 3 different open source tools and a couple articles for generat
   (how in the world did I never know about this until now!)
 
 API_Add-In  - CVMichael ((Michael Ciurescu) - 2.3.2004 - replacement API viewer w/mods (soon to be)
+
+hex_tooltip - C dll to inject into VB6 IDE - when debugger is running mouse over numeric values will show
+   normal value display plus its hex representation. Loader will be added to one of the above sometime soon.
